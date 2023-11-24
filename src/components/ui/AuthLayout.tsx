@@ -6,7 +6,7 @@ export function AuthLayout({ children }: PropsWithChildren) {
   return (
     <section className="bg-white">
       <div className="flex justify-center min-h-screen">
-        <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-2/3">
+        <div className="flex items-center w-full max-w-3xl py-8 px-4 md:p-8 mx-auto lg:px-12 lg:w-2/3">
           <div className="w-full">
             <h1 className="text-3xl font-semibold tracking-wider text-gray-800 capitalize leading-10 font-montserrat">
               SANTA
