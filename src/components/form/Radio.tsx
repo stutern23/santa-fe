@@ -1,11 +1,18 @@
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
-export function Radio({ options }: { options: string[] }) {
+export function Radio({
+  options,
+  onChange,
+}: {
+  options: string[];
+  onChange: (option: string) => void;
+}) {
   const [selectedOption, setSelectedOption] = useState<string>(""); // Initially, no option is selected
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option);
+    onChange(option);
   };
 
   return options.map((option, i) => (
