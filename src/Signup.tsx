@@ -39,12 +39,15 @@ export default function Signup() {
           <Button
             className={twMerge(
               "transition-colors duration-200 bg-red-600 p-2 text-base md:p-4 hover:bg-red-800",
-              !isFormValid && "bg-gray-500 hover:bg-gray-500"
+              !isFormValid && "bg-gray-500 hover:bg-gray-500 cursor-not-allowed"
             )}
-            label="Signup"
             disabled={isFormValid}
-            onClick={() => {}}
-          />
+            onClick={() => {
+              console.log("clicked");
+            }}
+          >
+            Signup
+          </Button>
         </div>
       </div>
       <p className="font-montserrat text-base md:text-xl text-[#AF9999] font-semibold">
