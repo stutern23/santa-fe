@@ -6,6 +6,7 @@ const radioOptions = ["Talk with santa", "Donate"];
 function App() {
   const onChange = (option: string) => {
     console.log("SELECTED OPTION => ", option);
+    window.location.assign("/signin");
   };
 
   return (
