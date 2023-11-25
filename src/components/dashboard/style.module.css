@@ -1,0 +1,11 @@
+.home_bg {
+     background-image: url("../../assets/image 6.svg");
+     background-repeat: no-repeat;
+     background-size: cover;
+}
+
+.textInput::placeholder {
+     font-weight: 500;
+     font-size: .8rem;
+     color: #38000098;
+}
