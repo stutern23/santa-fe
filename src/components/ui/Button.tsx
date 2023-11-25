@@ -5,11 +5,9 @@ interface Props
   extends DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
-  > {
-  label: string;
-}
+  > {}
 
-export function Button({ label, className, ...props }: Props) {
+export function Button({ className, children, ...props }: Props) {
   return (
     <button
       className={twMerge(
@@ -18,7 +16,7 @@ export function Button({ label, className, ...props }: Props) {
       )}
       {...props}
     >
-      {label}
+      {children}
     </button>
   );
 }
