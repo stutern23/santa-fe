@@ -9,3 +9,24 @@
      font-size: .8rem;
      color: #38000098;
 }
+
+.resize_width {
+     width: calc(100% - 60px);
+     margin-left: auto;
+}
+
+@media screen and (min-width:768px) {
+     .resize_width_desktop {
+     width: 85%;
+     margin: auto;
+     }
+}
+
+@media screen and (min-width:1024px) {
+     .resize_width_desktop {
+     width: calc(100% - 300px);
+     margin: 0;
+     margin-left: auto;
+}
+     
+}
