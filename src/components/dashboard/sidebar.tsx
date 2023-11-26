@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Dashboard from "../../assets/ic_round-dashboard.svg";
 import Chat from "../../assets/ic_round-chat.svg";
 import Gift from "../../assets/mdi_gift.svg";
