@@ -7,6 +7,7 @@ import Home from "./components/dashboard/home.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import Chat from "./Chat.tsx";
+import ErrorPage from "./components/dashboard/Error.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     path: "/chat",
     element: <Chat />,
   },
+  {
+    path: "*",
+    element: <ErrorPage />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

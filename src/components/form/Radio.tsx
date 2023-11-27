@@ -44,7 +44,7 @@ function RadioItem({
           isSelected && "bg-red-600"
         )}
       />
-      <span className="ml-2 text-white font-montserrat text-base whitespace-nowrap font-semibold">
+      <span className="ml-2 text-white font-montserrat text-base whitespace-nowrap font-semibold cursor-pointer">
         {option}
       </span>
     </div>
