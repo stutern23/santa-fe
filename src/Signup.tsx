@@ -23,7 +23,7 @@ export default function Signup() {
         childAge: childsAge,
       });
     },
-    onSuccess(data, variables, context) {
+    onSuccess() {
       toast.custom(TwToast);
     },
   });
