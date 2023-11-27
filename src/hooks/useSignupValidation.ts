@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as z from "zod";
 
-interface Form {
+export interface Form {
   parentFirstName: string;
   parentLastName: string;
   consentGiven: boolean;
@@ -9,6 +9,8 @@ interface Form {
   childLastName: string;
   password: string;
   email: string;
+  childsAge: number;
+  gender: "female" | "male" | string;
 }
 
 export function useSignupValidation() {
@@ -33,9 +35,22 @@ export function useSignupValidation() {
     password,
     childFirstName: z.string().min(2, "Childs First Name is required"),
     childLastName: z.string().min(2, "Childs Last Name is required"),
-    consentGiven: z
-      .boolean({})
-      .refine((checked) => checked, { message: "Please check to consent" }),
+    consentGiven: z.boolean({}).refine((checked) => checked === true, {
+      message: "Please check to consent",
+    }),
+    childsAge: z
+      .number({
+        invalid_type_error: "Please enter a valid age",
+      })
+      .refine((age) => age > 0, "Age cannot be 0"),
+    gender: z
+      .enum(["male", "female", "Gender"], {
+        errorMap: () => ({ message: "Please select a valid gender" }),
+      })
+      .refine(
+        (gender) => gender === "male" || gender === "female",
+        "please select a gender"
+      ),
   });
 
   const [formData, setFormData] = useState<Form>({
@@ -46,6 +61,8 @@ export function useSignupValidation() {
     childLastName: "",
     password: "",
     email: "",
+    childsAge: 0,
+    gender: "",
   });
 
   const [passwordRules, setpasswordRules] = useState({
@@ -54,7 +71,9 @@ export function useSignupValidation() {
     passHasSpecialChar: false,
   });
 
-  const [formErrors, setFormErrors] = useState<Partial<Form>>({});
+  const [formErrors, setFormErrors] = useState<
+    Partial<Record<keyof Form, string>>
+  >({});
   const [isFormValid, setIsFormValid] = useState<Record<keyof Form, boolean>>({
     childFirstName: false,
     childLastName: false,
@@ -63,6 +82,8 @@ export function useSignupValidation() {
     parentLastName: false,
     email: false,
     password: false,
+    childsAge: false,
+    gender: false,
   });
 
   //   PASSWORD RULES HELPER FUNCTIONS

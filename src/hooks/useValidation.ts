@@ -3,13 +3,13 @@ import * as z from "zod";
 import { validationError } from "../utils";
 
 interface Form {
-  email: string;
+  username: string;
   password: string;
 }
 
 export const useFormValidation = () => {
   // Validation schemas
-  const email = z.string().email("Invalid email address");
+  const username = z.string().min(3, "invalid username");
   const password = z
     .string()
     .refine(hasMinLen, {
@@ -23,7 +23,7 @@ export const useFormValidation = () => {
     });
 
   const [formData, setFormData] = useState<Form>({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -34,8 +34,8 @@ export const useFormValidation = () => {
   });
 
   const [formErrors, setFormErrors] = useState<Partial<Form>>({});
-  const [isFormValid, setIsFormValid] = useState({
-    email: false,
+  const [isFormValid, setIsFormValid] = useState<Record<keyof Form, boolean>>({
+    username: false,
     password: false,
   });
 
@@ -70,14 +70,17 @@ export const useFormValidation = () => {
 
   const validateEmail = () => {
     try {
-      email.parse(formData.email);
+      username.parse(formData.username);
       setFormErrors({});
-      setIsFormValid((prev) => ({ ...prev, email: true }));
+      setIsFormValid((prev) => ({ ...prev, username: true }));
     } catch (error) {
       if (error instanceof z.ZodError) {
-        validationError<Form>("email", error, (errors) => {
-          setFormErrors((_errors) => ({ ..._errors, email: errors["email"] }));
-          setIsFormValid((prev) => ({ ...prev, email: false }));
+        validationError<Form>("username", error, (errors) => {
+          setFormErrors((_errors) => ({
+            ..._errors,
+            username: errors["username"],
+          }));
+          setIsFormValid((prev) => ({ ...prev, username: false }));
         });
       }
     }

@@ -1,8 +1,5 @@
-import style from "./style.module.css";
 import Santa1 from "../../assets/pngwing 4.svg";
-// import Mic from "../../assets/ic_round-mic.svg";
 import { DashboardLayout } from "../ui";
-// import { useVoiceRecord } from "../../hooks/useRecord";
 import { Link } from "react-router-dom";
 import Snow from "../../assets/snow02.gif";
 
@@ -23,12 +20,17 @@ const wishes = [
     id: 4,
     wish: ` Merry Christmas! I hope Santa brings you presents – and not sickness – this holiday season!`,
   },
-
-]
+];
 
 const Home = () => {
   // const { audio, startRecording, stopRecording, isRecording } =
   //   useVoiceRecord();
+
+  /*   const _mutation = useMutation({
+    mutationFn: () => {
+      return modelInstance.post("/", {});
+    },
+  }); */
 
   return (
     <DashboardLayout>
@@ -55,31 +57,50 @@ const Home = () => {
 
         <div className={`grid md:grid-cols-2 gap-[1.5rem] `}>
           <div className={`relative`}>
-            <iframe src={"https://youtube.com/embed/HvQg_NJalZI?si=2CIfBVENifUqewWs"}
-            title="Short Christmas Stories" className={`w-full h-full `} allowFullScreen></iframe>
+            <iframe
+              src={"https://youtube.com/embed/HvQg_NJalZI?si=2CIfBVENifUqewWs"}
+              title="Short Christmas Stories"
+              className={`w-full h-full `}
+              allowFullScreen
+            ></iframe>
           </div>
           <div className={`relative`}>
             <div className={`rounded-10`}>
-              <iframe src={"https://youtube.com/embed/YEDXBmMv5zE?si=N6MpWvN6osaMiRlR"} className={`w-full h-full`}
-              title="Short Christmas Stories"allowFullScreen></iframe>
-              
+              <iframe
+                src={
+                  "https://youtube.com/embed/YEDXBmMv5zE?si=N6MpWvN6osaMiRlR"
+                }
+                className={`w-full h-full`}
+                title="Short Christmas Stories"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
         </div>
 
         <div className={`grid md:grid-cols-2 gap-[1rem]`}>
           {wishes.map((wish) => {
-            return <div
-            className={`w-full rounded-[10.28px] py-8 p-4 bg-[#630000] mx-auto text-[#fff] relative`}
-            >
-              <div>
-                <img src={Snow} alt="Snow flakes" className={`absolute right-0 left-0 top-[20px] bottom-[150px] h-[70%] w-[70%] mx-auto`} />
+            return (
+              <div
+                className={`w-full rounded-[10.28px] py-8 p-4 bg-[#630000] mx-auto text-[#fff] relative`}
+              >
+                <div>
+                  <img
+                    src={Snow}
+                    alt="Snow flakes"
+                    className={`absolute right-0 left-0 top-[20px] bottom-[150px] h-[70%] w-[70%] mx-auto`}
+                  />
+                </div>
+                <p className={`mb-4`}>{wish.wish}</p>
+                <Link
+                  to="/chat"
+                  className={`font-[600] text-[1.1rem] border-2 border-[#fff] rounded-[8px] py-1 px-4`}
+                >
+                  Make a wish!
+                </Link>
               </div>
-            <p className={`mb-4`}>{wish.wish}</p>
-            <Link to="/chat" className={`font-[600] text-[1.1rem] border-2 border-[#fff] rounded-[8px] py-1 px-4`}>Make a wish!</Link>
-          </div>
+            );
           })}
-          
         </div>
         {/* <div>
           <div className={`relative`}>

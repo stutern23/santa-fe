@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 
 export function useVoiceRecord() {
   const [isRecording, setIsRecording] = useState<boolean>(false);
@@ -59,12 +59,6 @@ export function useVoiceRecord() {
       setAudioChunks([]);
     };
   };
-
-  useEffect(() => {
-    console.log("RECORDING => ", isRecording);
-    console.log("CHUNKS => ", audioChunks);
-    console.log(audio);
-  }, [isRecording, audioChunks, audio]);
 
   return { startRecording, stopRecording, audio, isRecording };
 }

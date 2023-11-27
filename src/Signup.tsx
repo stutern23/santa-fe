@@ -1,14 +1,36 @@
 import { useState } from "react";
 import { Input } from "./components/form";
-import { AuthLayout, Button } from "./components/ui";
+import { AuthLayout, Button, TwToast } from "./components/ui";
 import { useSignupValidation } from "./hooks";
 import { twMerge } from "tailwind-merge";
+import { useMutation } from "@tanstack/react-query";
+import { axiosInstance } from "./lib";
+import { toast } from "react-hot-toast";
 
 export default function Signup() {
-  const { formData, handleChange, formErrors, isFormValid } =
+  const { formData, handleChange, formErrors, isFormValid, validate } =
     useSignupValidation();
 
   const [consent, setConsent] = useState<boolean>(false);
+
+  const mutation = useMutation({
+    mutationFn: () => {
+      validate();
+      const { email, childsAge, ..._formData } = formData;
+      return axiosInstance.post("auth/signup", {
+        ..._formData,
+        parentEmail: email,
+        childAge: childsAge,
+      });
+    },
+    onSuccess() {
+      toast.custom((t) => (
+        <TwToast t={t} message="Signed up successfully!" title="Success" />
+      ));
+      window.location.assign("/signin");
+      // console.log(data.data);
+    },
+  });
 
   return (
     <AuthLayout>
@@ -50,7 +72,7 @@ export default function Signup() {
                 }}
                 className={twMerge(
                   "flex justify-center items-center w-5 h-5 rounded-sm border-2 border-white",
-                  !consent ? "bg-gray-400" : "bg-PRIMARY"
+                  consent === true ? "bg-PRIMARY" : "bg-gray-500"
                 )}
               >
                 <svg
@@ -73,7 +95,7 @@ export default function Signup() {
               <p className="my-1 text-red-500"> {formErrors.consentGiven}</p>
             )}
           </div>
-          <div className="md:flex justify-between items-center gap-2 ">
+          <div className="md:flex justify-between items-center  gap-5 md:gap-2 ">
             <Input
               inputProps={{
                 placeholder: "Joe",
@@ -92,11 +114,57 @@ export default function Signup() {
                 name: "childLastName",
                 onChange: (e) => handleChange("childLastName", e.target.value),
               }}
-              label="Child First Name"
+              label="Child Last Name"
               error={formErrors.childLastName}
               containerClass="w-full"
             />
           </div>
+          <div className="md:flex justify-between items-center gap-2 ">
+            <Input
+              inputProps={{
+                placeholder: "Enter Age",
+                value: formData.childsAge,
+                name: "childsAge",
+                type: "number",
+                onChange: (e) =>
+                  handleChange("childsAge", e.target.valueAsNumber),
+              }}
+              label="Child Age"
+              error={formErrors.childsAge}
+              containerClass="w-full"
+            />
+
+            <div className="w-full">
+              <label
+                htmlFor=""
+                className="block mb-2 text-white text-base md:text-xl"
+              >
+                Gender
+              </label>
+              <div className="inline-block relative w-full">
+                <select
+                  className="block appearance-none w-full bg-PRIMARY border-2 border-white hover:border-gray-500 px-5 py-3 rounded-[10px] leading-tight text-white focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 "
+                  defaultValue={"Gender"}
+                  onChange={(e) => handleChange("gender", e.target.value)}
+                >
+                  <option>Gender</option>
+                  <option value={"male"}>Male</option>
+                  <option value={"female"}>Female</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                  <svg
+                    className="fill-current h-4 w-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </div>
+              </div>
+              <p className="my-1 text-red-500">{formErrors.gender}</p>
+            </div>
+          </div>
+
           {/* old inputs */}
           <Input
             inputProps={{
@@ -123,20 +191,19 @@ export default function Signup() {
 
           <Button
             className={twMerge(
-              "transition-colors duration-200 bg-[#fff] p-2 text-[#600000] md:p-4 hover:bg-red-800",
-              !isFormValid && "bg-gray-300 hover:bg-gray-300 cursor-not-allowed"
+              "transition-colors duration-200 bg-red-600 p-2 text-base md:p-4 hover:bg-red-800",
+              (!isFormValid || mutation.isPending) &&
+                "bg-gray-500 hover:bg-gray-500 cursor-not-allowed"
             )}
-            disabled={isFormValid}
-            onClick={() => {
-              console.log("clicked");
-            }}
+            disabled={!isFormValid}
+            onClick={() => mutation.mutate()}
           >
             Signup
           </Button>
         </div>
-      </div>{" "}
-      <p className="font-montserrat text-base md:text-xl text-[#914242] font-semibold">
-        Already have an account?{" "}
+      </div>
+      <p className="font-montserrat text-base md:text-xl text-[#AF9999] font-semibold">
+        Already have an account?
         <a href="/signin" className="text-PRIMARY">
           Signin
         </a>
