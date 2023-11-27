@@ -29,7 +29,7 @@ export function Input({
         )}
         {...inputProps}
       />
-      {error && <p className="my-1 text-red-500"> {error}</p>}
+      <p className="my-1 text-red-500">{error && error}</p>
     </div>
   );
 }
