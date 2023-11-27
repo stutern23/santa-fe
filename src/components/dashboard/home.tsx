@@ -5,8 +5,12 @@ import Santa3 from "../../assets/image 5.svg";
 import PlayBtn from "../../assets/Polygon 1.svg";
 import Mic from "../../assets/ic_round-mic.svg";
 import { DashboardLayout } from "../ui";
+import { useVoiceRecord } from "../../hooks/useRecord";
 
 const Home = () => {
+  const { audio, startRecording, stopRecording, isRecording } =
+    useVoiceRecord();
+
   return (
     <DashboardLayout>
       <div className={`grid gap-[1.5rem] my-4`}>
@@ -81,18 +85,33 @@ const Home = () => {
         </div>
         <div>
           <div className={`relative`}>
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="Hi, I am SantaAI, what do you want for christmas"
-              className={`${style.textInput} p-3 bg-white border border-PRIMARY rounded-[10px] w-full outline-none font-montserrat`}
-            />
-            <div
-              className={`absolute bg-red-600 w-[25px] h-[25px] rounded-full flex justify-center items-center p-1 right-[14px] top-[13px]`}
-            >
-              <img src={Mic} alt="Microphone" />
-            </div>
+            {audio ? (
+              <audio src={audio} controls />
+            ) : (
+              <input
+                type="text"
+                name=""
+                id=""
+                placeholder="Hi, I am SantaAI, what do you want for christmas"
+                className={`${style.textInput} p-3 bg-white border border-PRIMARY rounded-[10px] w-full outline-none font-montserrat`}
+              />
+            )}
+
+            {!isRecording ? (
+              <button
+                className={`absolute bg-red-600 w-[25px] h-[25px] rounded-full flex justify-center items-center p-1 right-[14px] top-[13px]`}
+                onClick={startRecording}
+              >
+                <img src={Mic} alt="Microphone" />
+              </button>
+            ) : (
+              <button
+                className={`absolute text-white bg-red-600 w-[25px] h-[25px] rounded-full flex justify-center items-center p-1 right-[14px] top-[13px]`}
+                onClick={stopRecording}
+              >
+                s
+              </button>
+            )}
           </div>
         </div>
       </div>

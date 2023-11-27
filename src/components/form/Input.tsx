@@ -8,15 +8,17 @@ interface Props {
     HTMLInputElement
   >;
   error?: string;
+  containerClass?: string;
 }
 
 export function Input({
   label,
   inputProps: { className, ...inputProps },
   error,
+  containerClass,
 }: Props) {
   return (
-    <div>
+    <div className={twMerge(containerClass)}>
       <label className="block mb-2 text-white text-base md:text-xl">
         {label}
       </label>
