@@ -72,7 +72,7 @@ const Sidebar = () => {
                 toggle ? `justify-start gap-[.3rem]` : `justify-center`
               }`}
             >
-              <Link to="/home">
+              <Link to="/chat">
                 <img src={Chat} alt="Chat icon" />
               </Link>
 
@@ -90,12 +90,12 @@ const Sidebar = () => {
                 toggle ? `justify-start gap-[.3rem]` : `justify-center`
               }`}
             >
-              <Link to="/home">
+              <Link to="/gift">
                 <img src={Gift} alt="Gift icon" />
               </Link>
 
               <Link
-                to="/home"
+                to="/gift"
                 className={`text-[#370000] text-[.9rem] lg:text-[1rem]  font-[500] capitalize lg:block ${
                   toggle ? `block` : `hidden`
                 }`}
@@ -108,12 +108,12 @@ const Sidebar = () => {
                 toggle ? `justify-start gap-[.3rem]` : `justify-center`
               }`}
             >
-              <Link to="/home">
+              <Link to="/donate">
                 <img src={Donate} alt="Donate icon" />
               </Link>
 
               <Link
-                to="/home"
+                to="/donate"
                 className={`text-[#370000] text-[.9rem] lg:text-[1rem]  font-[500] capitalize lg:block ${
                   toggle ? `block` : `hidden`
                 }`}
@@ -126,12 +126,12 @@ const Sidebar = () => {
                 toggle ? `justify-start gap-[.3rem]` : `justify-center`
               }`}
             >
-              <Link to="/home">
+              <Link to="/setting">
                 <img src={Setting} alt="Setting icon" />
               </Link>
 
               <Link
-                to="/home"
+                to="/setting"
                 className={`text-[#370000] text-[.9rem] lg:text-[1rem]  font-[500] capitalize lg:block ${
                   toggle ? `block` : `hidden`
                 }`}

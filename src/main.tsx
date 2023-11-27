@@ -13,6 +13,7 @@ import { AppProvider } from "./context/index.tsx";
 import "./index.css";
 
 const queryClient = new QueryClient();
+import ErrorPage from "./components/dashboard/Error.tsx";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     element: <Chat />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);
 
