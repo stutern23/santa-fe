@@ -123,8 +123,8 @@ export default function Signup() {
 
           <Button
             className={twMerge(
-              "transition-colors duration-200 bg-red-600 p-2 text-base md:p-4 hover:bg-red-800",
-              !isFormValid && "bg-gray-500 hover:bg-gray-500 cursor-not-allowed"
+              "transition-colors duration-200 bg-[#fff] p-2 text-[#600000] md:p-4 hover:bg-red-800",
+              !isFormValid && "bg-gray-300 hover:bg-gray-300 cursor-not-allowed"
             )}
             disabled={isFormValid}
             onClick={() => {
@@ -135,7 +135,7 @@ export default function Signup() {
           </Button>
         </div>
       </div>{" "}
-      <p className="font-montserrat text-base md:text-xl text-[#AF9999] font-semibold">
+      <p className="font-montserrat text-base md:text-xl text-[#914242] font-semibold">
         Already have an account?{" "}
         <a href="/signin" className="text-PRIMARY">
           Signin
