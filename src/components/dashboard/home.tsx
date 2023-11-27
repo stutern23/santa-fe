@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import style from "./style.module.css";
 import Santa1 from "../../assets/pngwing 4.svg";
 import Santa2 from "../../assets/image 4.svg";
@@ -6,10 +7,19 @@ import PlayBtn from "../../assets/Polygon 1.svg";
 import Mic from "../../assets/ic_round-mic.svg";
 import { DashboardLayout } from "../ui";
 import { useVoiceRecord } from "../../hooks/useRecord";
+import { useAppContext } from "../../context";
+import { useMutation } from "@tanstack/react-query";
+import { modelInstance } from "../../lib";
 
 const Home = () => {
   const { audio, startRecording, stopRecording, isRecording } =
     useVoiceRecord();
+
+  const mutation = useMutation({
+    mutationFn: () => {
+      return modelInstance.post("/", {});
+    },
+  });
 
   return (
     <DashboardLayout>

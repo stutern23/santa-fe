@@ -1,5 +1,13 @@
-import { toast } from "react-hot-toast";
-export function TwToast(t: any) {
+import { toast, Toast } from "react-hot-toast";
+export function TwToast({
+  t,
+  message,
+  title,
+}: {
+  t: Toast;
+  message: string;
+  title?: string;
+}) {
   return (
     <div
       className={`${
@@ -8,8 +16,10 @@ export function TwToast(t: any) {
     >
       <div className="flex-1 w-0 p-4">
         <div className="ml-3 flex-1">
-          <p className="text-sm font-medium text-gray-900">Emilia Gates</p>
-          <p className="mt-1 text-sm text-gray-500">Signed up successfully!</p>
+          {title && (
+            <p className="text-sm font-medium text-gray-900">{title}</p>
+          )}
+          <p className="mt-1 text-sm text-gray-500">{message}</p>
         </div>
       </div>
       <div className="flex border-l border-gray-200">

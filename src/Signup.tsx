@@ -24,7 +24,11 @@ export default function Signup() {
       });
     },
     onSuccess() {
-      toast.custom(TwToast);
+      toast.custom((t) => (
+        <TwToast t={t} message="Signed up successfully!" title="Success" />
+      ));
+      window.location.assign("/signin");
+      // console.log(data.data);
     },
   });
 
@@ -188,7 +192,8 @@ export default function Signup() {
           <Button
             className={twMerge(
               "transition-colors duration-200 bg-red-600 p-2 text-base md:p-4 hover:bg-red-800",
-              !isFormValid && "bg-gray-500 hover:bg-gray-500 cursor-not-allowed"
+              (!isFormValid || mutation.isPending) &&
+                "bg-gray-500 hover:bg-gray-500 cursor-not-allowed"
             )}
             disabled={!isFormValid}
             onClick={() => mutation.mutate()}
