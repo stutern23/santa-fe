@@ -44,7 +44,7 @@ export default function Signin() {
             disabled={isFormValid}
             onClick={() => {}}
           >
-            Signup
+            Signin
           </Button>
         </div>
       </div>
