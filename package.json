@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.7",
+<<<<<<< HEAD
     "@tanstack/react-query": "^5.8.7",
+=======
+>>>>>>> 3d66d56 (Added payment page)
     "axios": "^1.6.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
