@@ -14,6 +14,7 @@ import "./index.css";
 
 const queryClient = new QueryClient();
 import ErrorPage from "./components/dashboard/Error.tsx";
+import Donate from "./components/dashboard/Donate.tsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <ErrorPage />,
+  },
+  {
+    path: "/donate",
+    element: <Donate />
   },
 ]);
 

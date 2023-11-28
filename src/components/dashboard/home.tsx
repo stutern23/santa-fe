@@ -81,7 +81,7 @@ const Home = () => {
         <div className={`grid md:grid-cols-2 gap-[1rem]`}>
           {wishes.map((wish) => {
             return (
-              <div
+              <div key={wish.id}
                 className={`w-full rounded-[10.28px] py-8 p-4 bg-[#630000] mx-auto text-[#fff] relative`}
               >
                 <div>
